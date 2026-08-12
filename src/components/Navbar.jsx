@@ -13,7 +13,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-slate-950/70 backdrop-blur-md border-b border-white/5">
+    <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0d0b21]">
       <header className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
         <div className="flex items-center gap-3">
@@ -39,7 +39,7 @@ export default function Navbar() {
         </div>
 
         {/* Centered pill nav */}
-        <ul className="hidden items-center gap-1 rounded-full border border-white/10 bg-slate-800/40 px-2 py-1.5 backdrop-blur-md md:flex">
+        <ul className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1.5 backdrop-blur-md md:flex">
           {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -61,7 +61,7 @@ export default function Navbar() {
           </Button>
           <Button
             radius="full"
-            className="bg-orange-500 px-5 font-semibold text-white hover:bg-orange-600"
+            className="bg-[#ff6a3d] px-5 font-semibold text-white hover:bg-[#ff7d52]"
           >
             Sign up
           </Button>
@@ -70,7 +70,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="mx-4 mb-2 rounded-2xl border border-white/10 bg-slate-950/90 backdrop-blur-md md:hidden">
+        <div className="mx-4 mb-2 rounded-2xl border border-white/10 bg-[#0d0b21]/95 backdrop-blur-md md:hidden">
           <ul className="flex flex-col gap-1 p-4">
             {navLinks.map((link) => (
               <li key={link.label}>
@@ -83,7 +83,7 @@ export default function Navbar() {
               <Button radius="full" className="bg-white/10 text-white font-semibold w-full hover:bg-white/20">
                 Log in
               </Button>
-              <Button radius="full" className="bg-orange-500 text-white font-semibold w-full hover:bg-orange-600">
+              <Button radius="full" className="bg-[#ff6a3d] text-white font-semibold w-full hover:bg-[#ff7d52]">
                 Sign up
               </Button>
             </li>
