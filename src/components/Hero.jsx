@@ -15,10 +15,9 @@ const Hero = () => {
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl">
-           Ride for students,
-            <br />
-            <span className="text-[#ff7a52]">by students.</span>
+          <h1 className="text-4xl font-extrabold text-white sm:text-5xl lg:text-6xl font-outfit">
+            Ride for <span className="text-[#ff6a3d]">students</span>, by{" "}
+            <span className="text-[#ff6a3d]">students.</span>
           </h1>
 
           {/* Subcopy */}
@@ -29,14 +28,14 @@ const Hero = () => {
 
           {/* CTAs */}
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <button className="group inline-flex items-center gap-2 rounded-full bg-[#ff6a3d] px-6 py-3.5 font-semibold text-white shadow-[0_8px_30px_rgba(255,106,61,0.35)] transition hover:bg-[#ff7d52]">
+            <button className="group inline-flex items-center gap-2 rounded-full bg-[#ff6a3d] px-6 py-3.5 font-semibold text-white shadow-[0_8px_30px_rgba(255,106,61,0.35)] transition hover:bg-[#ff7d52] cursor-pointer">
               Get started with AIUB ID
               <ArrowRight
                 size={18}
                 className="transition group-hover:translate-x-0.5"
               />
             </button>
-            <button className="rounded-full bg-white/5 px-6 py-3.5 font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/10">
+            <button className="rounded-full bg-white/5 px-6 py-3.5 font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/10 cursor-pointer">
               Browse rides
             </button>
           </div>
