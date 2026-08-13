@@ -23,7 +23,7 @@ const Facility = () => {
           </h2>
 
           {/* Body copy */}
-          <p className="mt-6 max-w-lg leading-relaxed text-slate-600">
+          <p className="mt-6 max-w-lg leading-relaxed text-slate-600 font-semibold">
             Sick or pregnant students can choose a comfort-first category
             when finding a ride. UniRide prioritizes available car rides
             first, helping you make a more comfortable trip to or from AIUB.
@@ -40,8 +40,8 @@ const Facility = () => {
           </div>
 
           {/* Footnote */}
-          <p className="mt-6 font-mono text-xs tracking-wide text-slate-400">
-            CAR RIDES RECOMMENDED &middot; BIKE RIDES ALWAYS AVAILABLE
+          <p className="mt-6 font-mono text-xs tracking-wide text-indigo-600 font-semibold">
+            CAR RIDES RECOMMENDED &middot; <span className='text-[#ff6a3d]'>BIKE RIDES ALWAYS AVAILABLE</span>
           </p>
         </div>
 
@@ -79,15 +79,15 @@ const Facility = () => {
                 </div>
               </div>
               <div className="mt-4 flex items-center gap-2 text-sm text-slate-500">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                Available options shown first
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex items-center" />
+                <p className='font-semibold'>Available options shown first</p>
               </div>
             </div>
 
             {/* Footer note */}
             <div className="mt-5 flex items-start gap-3 rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
               <AlertCircle size={18} className="mt-0.5 shrink-0 text-white/70" />
-              <p className="text-sm leading-relaxed text-indigo-100">
+              <p className="text-sm leading-relaxed text-indigo-100 font-semibold">
                 You are always in control: this is a recommendation, not a
                 restriction.
               </p>

@@ -21,7 +21,7 @@ const Hero = () => {
           </h1>
 
           {/* Subcopy */}
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-slate-300">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-slate-300 font-semibold">
             Ride with verified AIUB classmates. Share a car or bike trip around
             Dhaka and make every campus commute feel simpler.
           </p>
