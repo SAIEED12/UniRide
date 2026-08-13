@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Home from "./page";
+import Footer from "../components/Footer";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col font-[var(--font-outfit)]">
         <Navbar />
         {children}
+        <Footer/>
       </body>
     </html>
   );
