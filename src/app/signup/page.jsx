@@ -144,13 +144,14 @@ const Signup = () => {
   const showBack = step > 1;
 
   return (
-    <div className="min-h-screen bg-[#F1F0F7] flex items-center justify-center px-4 py-16 relative">
+      <div className="min-h-screen bg-[#F1F0F7] flex flex-col items-center justify-center px-4 py-16 relative">
+        <h2 className="text-2xl font-bold text-[#14142B] text-center mb-6">Welcome to UniRide!</h2>
       {showBack && (
-        <button
+          <button
           onClick={goBack}
           className="absolute top-6 right-6 flex items-center gap-1 text-sm font-semibold"
           style={{ color: PRIMARY }}
-        >
+          >
           <ArrowLeft size={16} /> Back
         </button>
       )}
