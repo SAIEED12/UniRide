@@ -53,18 +53,20 @@ export default function Navbar() {
 
         {/* Right side auth buttons */}
         <div className="hidden items-center gap-3 md:flex">
-          <Button
+          <Link
+            href="/login"
             radius="full"
             className="bg-white/10 px-5 font-semibold text-white hover:bg-white/20"
           >
             Log in
-          </Button>
-          <Button
+          </Link>
+          <Link
+            href="/signup"
             radius="full"
             className="bg-[#ff6a3d] px-5 font-semibold text-white hover:bg-[#ff7d52]"
           >
             Sign up
-          </Button>
+          </Link>
         </div>
       </header>
 
