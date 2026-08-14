@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ArrowLeft, Mail, CreditCard, Minus, Plus, Check } from "lucide-react";
+import Link from "next/link";
 
 const PRIMARY = "#5546E0";
 const PRIMARY_LIGHT = "#EEF0FE";
@@ -69,7 +70,7 @@ function PrimaryButton({ children, disabled, onClick, type = "button" }) {
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className="w-full rounded-full py-3.5 font-semibold text-white text-[15px] transition-opacity"
+      className="w-full rounded-full py-3.5 font-semibold text-white text-[15px] transition-opacity hover:brightness-110 active:brightness-95"
       style={{
         backgroundColor: PRIMARY,
         opacity: disabled ? 0.55 : 1,
@@ -158,7 +159,7 @@ const Signup = () => {
 
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl px-8 py-9">
         <ProgressDots step={step} />
-        <p className="text-center text-sm text-[#8B8A9C] mb-6">
+        <p className="text-center text-sm font-semibold text-[#8B8A9C] mb-6">
           Step {step} of 3
         </p>
 
@@ -168,12 +169,12 @@ const Signup = () => {
             <h1 className="text-2xl font-bold text-[#14142B]">
               Create your account
             </h1>
-            <p className="text-[#6B7280] text-sm mt-1 mb-6">
+            <p className="text-[#6B7280] text-sm font-semibold   mt-1 mb-6">
               Verify your student status to join.
             </p>
 
             <label className="block mb-4">
-              <span className="block text-xs font-semibold tracking-wide text-[#14142B] mb-2">
+              <span className="block text-xs font-bold tracking-wide text-[#14142B] mb-2">
                 UNIVERSITY EMAIL
               </span>
               <div className="flex items-center gap-2 border border-[#E5E3F1] rounded-xl px-3.5 py-3">
@@ -189,7 +190,7 @@ const Signup = () => {
             </label>
 
             <label className="block mb-6">
-              <span className="block text-xs font-semibold tracking-wide text-[#14142B] mb-2">
+              <span className="block text-xs font-bold tracking-wide text-[#14142B] mb-2">
                 STUDENT ID
               </span>
               <div className="flex items-center gap-2 border border-[#E5E3F1] rounded-xl px-3.5 py-3">
@@ -208,11 +209,11 @@ const Signup = () => {
               Continue
             </PrimaryButton>
 
-            <p className="text-center text-sm text-[#6B7280] mt-5">
+            <p className="text-center text-sm font-semibold text-[#6B7280] mt-5">
               Already have an account?{" "}
-              <a href="/login" className="font-semibold" style={{ color: PRIMARY }}>
+              <Link href="/login" className="font-semibold cursor-pointer hover:text-[#14142B] hover:underline underline-offset-2" style={{ color: PRIMARY }}>
                 Log in
-              </a>
+              </Link>
             </p>
           </>
         )}
