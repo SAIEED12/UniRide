@@ -8,7 +8,6 @@ const PRIMARY = "#5546E0";
 const PRIMARY_LIGHT = "#EEF0FE";
 const DOT_MUTED = "#D8D6EC";
 
-/* ---------------- progress dots ---------------- */
 function ProgressDots({ step }) {
   return (
     <div className="flex items-center justify-center gap-2 mb-2">
@@ -163,7 +162,6 @@ const Signup = () => {
           Step {step} of 3
         </p>
 
-        {/* ---------------- STEP 1 ---------------- */}
         {step === 1 && (
           <>
             <h1 className="text-2xl font-bold text-[#14142B]">
