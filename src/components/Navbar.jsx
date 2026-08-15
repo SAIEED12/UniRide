@@ -7,6 +7,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
+    { label: "Home", href: "/" },
     { label: "Browse Rides", href: "#" },
     { label: "Post a Ride", href: "#" },
     { label: "My Rides", href: "#" },
@@ -33,9 +34,11 @@ export default function Navbar() {
           </button>
 
           <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/10">
-            <Image src="/logo.png" width={40} height={40} alt="UniRide logo" className="object-contain" />
+            <Link href="/">
+              <Image src="/logo.png" width={40} height={40} alt="UniRide logo" className="object-contain" />
+            </Link>
           </div>
-          <span className="hidden text-lg font-bold text-white sm:block">UniRide</span>
+          <Link href="/"  className="hidden text-lg font-bold text-white sm:block hover:no-underline">UniRide</Link>
         </div>
 
         {/* Centered pill nav */}
