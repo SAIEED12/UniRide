@@ -16,8 +16,8 @@ const Login = () => {
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-[#f2f2f8] px-4">
             <div className="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-                <h1 className="text-2xl font-bold text-gray-900">Welcome back</h1>
-                <p className="mt-1 text-gray-500 text-sm">Log in to your UniRide account.</p>
+                <h1 className="text-2xl font-bold text-gray-900">Welcome back!</h1>
+                <p className="mt-1 text-gray-500 text-sm font-semibold">Log in to your UniRide account.</p>
 
                 <form onSubmit={handleSubmit} className="mt-6 space-y-5">
                     <div>

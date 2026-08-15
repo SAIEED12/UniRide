@@ -41,13 +41,14 @@ export default function Navbar() {
         {/* Centered pill nav */}
         <ul className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1.5 backdrop-blur-md md:flex">
           {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white"
-              >
-                {link.label}
-              </Link>
+            <Link
+              key={link.label}
+              href={link.href}
+              underline="none"
+              className="rounded-full px-4 py-2 text-sm font-semibold text-white/90 no-underline transition-colors hover:bg-white/10 hover:text-white hover:no-underline"
+            >
+              {link.label}
+            </Link>
           ))}
         </ul>
 
@@ -55,15 +56,17 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/login"
-            radius="full"
-            className="bg-white/10 px-5 font-semibold text-white hover:bg-white/20"
+            
+            underline="none"
+            className="px-8 py-2 text-center font-semibold text-white no-underline bg-white/10 hover:bg-white/20 hover:no-underline"
           >
             Log in
           </Link>
           <Link
             href="/signup"
-            radius="full"
-            className="bg-[#ff6a3d] px-5 font-semibold text-white hover:bg-[#ff7d52]"
+            
+            underline="none"
+            className="px-8 py-2 text-center font-semibold text-white no-underline bg-[#ff6a3d] hover:bg-[#ff7d52] hover:no-underline"
           >
             Sign up
           </Link>
@@ -76,16 +79,20 @@ export default function Navbar() {
           <ul className="flex flex-col gap-1 p-4">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <Link href={link.href} className="block rounded-lg px-3 py-2 text-white/90 hover:bg-white/10">
+                <Link
+                  href={link.href}
+                  underline="none"
+                  className="block rounded-lg px-3 py-2 text-white/90 no-underline hover:bg-white/10 hover:no-underline"
+                >
                   {link.label}
                 </Link>
               </li>
             ))}
             <li className="mt-3 flex flex-col gap-2 border-t border-white/10 pt-3">
-              <Button radius="full" className="bg-white/10 text-white font-semibold w-full hover:bg-white/20">
+              <Button radius="full" className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-white/10 hover:bg-white/20">
                 Log in
               </Button>
-              <Button radius="full" className="bg-[#ff6a3d] text-white font-semibold w-full hover:bg-[#ff7d52]">
+              <Button radius="full" className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-[#ff6a3d] hover:bg-[#ff7d52]">
                 Sign up
               </Button>
             </li>
