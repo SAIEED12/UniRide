@@ -2,9 +2,13 @@
 import { useState } from "react";
 import { Link, Button } from "@heroui/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { signOut, useSession } from "@/lib/auth-client";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+  const { data: session, isPending } = useSession();
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -12,6 +16,12 @@ export default function Navbar() {
     { label: "Post a Ride", href: "#" },
     { label: "My Rides", href: "#" },
   ];
+
+  const handleLogout = async () => {
+    await signOut();
+    router.push("/");
+    router.refresh();
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0d0b21]">
@@ -57,22 +67,38 @@ export default function Navbar() {
 
         {/* Right side auth buttons */}
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/login"
-            
-            underline="none"
-            className="px-8 py-2 text-center font-semibold text-white no-underline bg-white/10 hover:bg-white/20 hover:no-underline"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/signup"
-            
-            underline="none"
-            className="px-8 py-2 text-center font-semibold text-white no-underline bg-[#ff6a3d] hover:bg-[#ff7d52] hover:no-underline"
-          >
-            Sign up
-          </Link>
+          {isPending ? (
+            <span className="text-sm font-semibold text-white/60">Loading…</span>
+          ) : session ? (
+            <>
+              <span className="text-sm font-semibold text-white/90">
+                Hi, {session.user.name.split(" ")[0]}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="px-8 py-2 text-center font-semibold text-white no-underline bg-white/10 hover:bg-white/20 cursor-pointer"
+              >
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                underline="none"
+                className="px-8 py-2 text-center font-semibold text-white no-underline bg-white/10 hover:bg-white/20 hover:no-underline"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/signup"
+                underline="none"
+                className="px-8 py-2 text-center font-semibold text-white no-underline bg-[#ff6a3d] hover:bg-[#ff7d52] hover:no-underline"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
         </div>
       </header>
 
@@ -92,12 +118,33 @@ export default function Navbar() {
               </li>
             ))}
             <li className="mt-3 flex flex-col gap-2 border-t border-white/10 pt-3">
-              <Button radius="full" className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-white/10 hover:bg-white/20">
-                Log in
-              </Button>
-              <Button radius="full" className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-[#ff6a3d] hover:bg-[#ff7d52]">
-                Sign up
-              </Button>
+              {session ? (
+                <>
+                  <span className="px-3 py-2 text-sm font-semibold text-white/90">
+                    Hi, {session.user.name.split(" ")[0]}
+                  </span>
+                  <Button
+                    radius="full"
+                    onPress={handleLogout}
+                    className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-white/10 hover:bg-white/20"
+                  >
+                    Log out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" underline="none" className="w-full">
+                    <Button radius="full" className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-white/10 hover:bg-white/20">
+                      Log in
+                    </Button>
+                  </Link>
+                  <Link href="/signup" underline="none" className="w-full">
+                    <Button radius="full" className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-[#ff6a3d] hover:bg-[#ff7d52]">
+                      Sign up
+                    </Button>
+                  </Link>
+                </>
+              )}
             </li>
           </ul>
         </div>

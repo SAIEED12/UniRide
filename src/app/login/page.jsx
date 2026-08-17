@@ -2,15 +2,28 @@
 import React, { useState } from 'react';
 import { Mail, Lock } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { signIn } from '@/lib/auth-client';
 
 const Login = () => {
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const [submitting, setSubmitting] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Wire this up to your auth logic
-        console.log({ email, password });
+        setSubmitting(true);
+        setError(null);
+        const { error: signInError } = await signIn.email({ email, password });
+        if (signInError) {
+            setError(signInError.message || 'Invalid email or password.');
+            setSubmitting(false);
+            return;
+        }
+        router.push('/');
+        router.refresh();
     };
 
     return (
@@ -71,11 +84,18 @@ const Login = () => {
                         </a>
                     </div>
 
+                    {error && (
+                        <p className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm font-semibold text-red-600">
+                            {error}
+                        </p>
+                    )}
+
                     <button
                         type="submit"
-                        className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-colors cursor-pointer"
+                        disabled={submitting}
+                        className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white font-semibold text-sm transition-colors cursor-pointer"
                     >
-                        Log in
+                        {submitting ? 'Logging in…' : 'Log in'}
                     </button>
                 </form>
 

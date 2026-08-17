@@ -3,11 +3,22 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
 const client = new MongoClient(process.env.MONGODB_URI);
-const db = client.db();
+const db = client.db(process.env.AUTH_DB_NAME);
 
 export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
+  },
+
+  user: {
+    additionalFields: {
+      studentId: { type: "string", required: true },
+      role: { type: "string", required: true },
+      vehicleType: { type: "string", required: false },
+      licensePlate: { type: "string", required: false },
+      seats: { type: "number", required: false },
+      passengerCategory: { type: "string", required: false },
+    },
   },
 
   database: mongodbAdapter(db, {

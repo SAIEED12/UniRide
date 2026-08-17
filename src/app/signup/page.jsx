@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowLeft, Mail, CreditCard, Minus, Plus, Check } from "lucide-react";
+import { ArrowLeft, Mail, CreditCard, User, Lock, Minus, Plus, Check } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signUp } from "@/lib/auth-client";
 
 const PRIMARY = "#5546E0";
 const PRIMARY_LIGHT = "#EEF0FE";
@@ -108,11 +110,16 @@ const CATEGORIES = [
 ];
 
 const Signup = () => {
+  const router = useRouter();
   const [step, setStep] = useState(1); // 1, 2, 3
   const [subStep, setSubStep] = useState("vehicle"); // used only when role === "both"
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
   const [form, setForm] = useState({
+    name: "",
     email: "",
+    password: "",
     studentId: "",
     role: null, // "offer" | "need" | "both"
     vehicleType: "car",
@@ -124,7 +131,10 @@ const Signup = () => {
   const update = (patch) => setForm((prev) => ({ ...prev, ...patch }));
 
   const step1Valid =
-    form.email.trim().length > 0 && form.studentId.trim().length > 0;
+    form.name.trim().length > 0 &&
+    form.email.trim().length > 0 &&
+    form.password.length >= 8 &&
+    form.studentId.trim().length > 0;
 
   const goBack = () => {
     if (step === 3 && form.role === "both" && subStep === "passenger") {
@@ -136,9 +146,31 @@ const Signup = () => {
     }
   };
 
-  const finish = () => {
-    // TODO: replace with real signup API call
-    console.log("submit signup", form);
+  const finish = async () => {
+    setSubmitting(true);
+    setError(null);
+    const { error: signUpError } = await signUp.email({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      password: form.password,
+      studentId: form.studentId.trim(),
+      role: form.role,
+      vehicleType: form.role === "need" ? undefined : form.vehicleType,
+      licensePlate:
+        form.role === "need" || !form.licensePlate.trim()
+          ? undefined
+          : form.licensePlate.trim(),
+      seats: form.role === "need" ? undefined : form.seats,
+      passengerCategory:
+        form.role === "offer" ? undefined : form.passengerCategory,
+    });
+    if (signUpError) {
+      setError(signUpError.message || "Something went wrong. Please try again.");
+      setSubmitting(false);
+      return;
+    }
+    router.push("/");
+    router.refresh();
   };
 
   const showBack = step > 1;
@@ -173,6 +205,22 @@ const Signup = () => {
 
             <label className="block mb-4">
               <span className="block text-xs font-bold tracking-wide text-[#14142B] mb-2">
+                FULL NAME
+              </span>
+              <div className="flex items-center gap-2 border border-[#E5E3F1] rounded-xl px-3.5 py-3">
+                <User size={16} className="text-[#9C9AB0]" />
+                <input
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => update({ name: e.target.value })}
+                  placeholder="e.g. John Doe"
+                  className="flex-1 outline-none text-sm text-[#14142B] placeholder:text-[#B4B2C4]"
+                />
+              </div>
+            </label>
+
+            <label className="block mb-4">
+              <span className="block text-xs font-bold tracking-wide text-[#14142B] mb-2">
                 UNIVERSITY EMAIL
               </span>
               <div className="flex items-center gap-2 border border-[#E5E3F1] rounded-xl px-3.5 py-3">
@@ -187,7 +235,7 @@ const Signup = () => {
               </div>
             </label>
 
-            <label className="block mb-6">
+            <label className="block mb-4">
               <span className="block text-xs font-bold tracking-wide text-[#14142B] mb-2">
                 STUDENT ID
               </span>
@@ -197,13 +245,35 @@ const Signup = () => {
                   type="text"
                   value={form.studentId}
                   onChange={(e) => update({ studentId: e.target.value })}
-                  placeholder="e.g. 10837421"
+                  placeholder="e.g. xx-xxxxx-x"
                   className="flex-1 outline-none text-sm text-[#14142B] placeholder:text-[#B4B2C4]"
                 />
               </div>
             </label>
 
-            <PrimaryButton disabled={!step1Valid} onClick={() => setStep(2)}>
+            <label className="block mb-6">
+              <span className="block text-xs font-bold tracking-wide text-[#14142B] mb-2">
+                PASSWORD
+              </span>
+              <div className="flex items-center gap-2 border border-[#E5E3F1] rounded-xl px-3.5 py-3">
+                <Lock size={16} className="text-[#9C9AB0]" />
+                <input
+                  type="password"
+                  value={form.password}
+                  onChange={(e) => update({ password: e.target.value })}
+                  placeholder="At least 8 characters"
+                  className="flex-1 outline-none text-sm text-[#14142B] placeholder:text-[#B4B2C4]"
+                />
+              </div>
+            </label>
+
+            {error && (
+              <p className="mb-4 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm font-semibold text-red-600">
+                {error}
+              </p>
+            )}
+
+            <PrimaryButton disabled={!step1Valid || submitting} onClick={() => setStep(2)}>
               Continue
             </PrimaryButton>
 
@@ -350,9 +420,16 @@ const Signup = () => {
                   Next: Passenger preferences
                 </PrimaryButton>
               ) : (
-                <PrimaryButton onClick={finish}>
-                  Finish — Get riding!
-                </PrimaryButton>
+                <>
+                  {error && (
+                    <p className="mb-4 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm font-semibold text-red-600">
+                      {error}
+                    </p>
+                  )}
+                  <PrimaryButton disabled={submitting} onClick={finish}>
+                    {submitting ? "Creating account…" : "Finish — Get riding!"}
+                  </PrimaryButton>
+                </>
               )}
             </>
           )}
@@ -381,8 +458,14 @@ const Signup = () => {
                 ))}
               </div>
 
-              <PrimaryButton onClick={finish}>
-                Finish — Start riding!
+              {error && (
+                <p className="mb-4 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm font-semibold text-red-600">
+                  {error}
+                </p>
+              )}
+
+              <PrimaryButton disabled={submitting} onClick={finish}>
+                {submitting ? "Creating account…" : "Finish — Start riding!"}
               </PrimaryButton>
             </>
           )}
