@@ -84,7 +84,7 @@ const FAQ = () => {
           Frequently Asked Questions
         </h2>
         <p className="mt-5 max-w-xl leading-relaxed text-slate-600 font-semibold">
-          Everything you need to know before your first ride. Can&apos;t find
+          All you need to know before your first ride. Can&apos;t find
           what you&apos;re looking for? Reach out to the UniRide team.
         </p>
 
