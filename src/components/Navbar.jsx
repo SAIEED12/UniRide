@@ -76,7 +76,7 @@ export default function Navbar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="px-8 py-2 text-center font-semibold text-white no-underline bg-white/10 hover:bg-white/20 cursor-pointer"
+                className="px-8 py-2 rounded-full text-center font-semibold text-white no-underline bg-white/10 hover:bg-white/20 cursor-pointer"
               >
                 Log out
               </button>
