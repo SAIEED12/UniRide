@@ -72,7 +72,7 @@ export default function Navbar() {
           ) : session ? (
             <>
               <span className="text-sm font-semibold text-white/90">
-                Hi, {session.user.name.split(" ")[0]}
+                Hi, {session.user.name?.split(" ")[0] || "User"}
               </span>
               <button
                 onClick={handleLogout}
@@ -121,12 +121,12 @@ export default function Navbar() {
               {session ? (
                 <>
                   <span className="px-3 py-2 text-sm font-semibold text-white/90">
-                    Hi, {session.user.name.split(" ")[0]}
+                    Hi, {session.user.name?.split(" ")[0] || "User"}
                   </span>
                   <Button
                     radius="full"
                     onPress={handleLogout}
-                    className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-white/10 hover:bg-white/20"
+                    className="w-full min-w-26 px-6 py-2.5 font-semibold text-white bg-white/10 hover:bg-white/20"
                   >
                     Log out
                   </Button>
@@ -134,12 +134,12 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link href="/login" underline="none" className="w-full">
-                    <Button radius="full" className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-white/10 hover:bg-white/20">
+                    <Button radius="full" className="w-full min-w-26 px-6 py-2.5 font-semibold text-white bg-white/10 hover:bg-white/20">
                       Log in
                     </Button>
                   </Link>
                   <Link href="/signup" underline="none" className="w-full">
-                    <Button radius="full" className="w-full min-w-[104px] px-6 py-2.5 font-semibold text-white bg-[#ff6a3d] hover:bg-[#ff7d52]">
+                    <Button radius="full" className="w-full min-w-26 px-6 py-2.5 font-semibold text-white bg-[#ff6a3d] hover:bg-[#ff7d52]">
                       Sign up
                     </Button>
                   </Link>
