@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${outfit.variable} ${inter.variable} ${dmMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-[var(--font-outfit)]">
+      <body className="min-h-full flex flex-col font-(--font-outfit)]">
         <Navbar />
         {children}
         <Footer/>
