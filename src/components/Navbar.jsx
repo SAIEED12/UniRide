@@ -9,6 +9,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
   const { data: session, isPending } = useSession();
+  console.log("Session data:", session); // Debugging line to check session data
 
   const navLinks = [
     { label: "Home", href: "/" },
