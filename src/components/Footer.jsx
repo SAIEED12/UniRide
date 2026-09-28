@@ -22,7 +22,7 @@ const linkGroups = [
   {
     title: 'Company',
     links: [
-      { label: 'About UniRide', href: '#' },
+      { label: 'About UniRide', href: '/aboutUs' },
       { label: 'Campus partnership', href: '#' },
       { label: 'Safety', href: '#' },
       { label: 'FAQ', href: '#' },
